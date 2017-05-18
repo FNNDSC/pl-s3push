@@ -51,7 +51,6 @@ class S3PushApp(ChrisApp):
                                      {'ServerSideEncryption': 'AES256'})
 
 
-
 # ENTRYPOINT
 if __name__ == "__main__":
     app = S3PushApp()
