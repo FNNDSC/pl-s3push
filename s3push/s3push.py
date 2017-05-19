@@ -44,7 +44,7 @@ class S3PushApp(ChrisApp):
 
         s3client = boto3.client('s3')
         for (dirpath, dirnames, filenames) in os.walk(options.inputdir):
-            relative_path = dirpath.replace(options.inputdir, "")
+            relative_path = dirpath.replace(options.inputdir, "").strip('/')
             for fname in filenames:
                 key = os.path.join(options.prefix, relative_path, fname)
                 s3client.upload_file(os.path.join(dirpath, fname), options.bucket, key,
