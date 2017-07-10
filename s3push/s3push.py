@@ -32,10 +32,9 @@ class S3PushApp(ChrisApp):
     VERSION         = '0.1'
 
     def define_parameters(self):
-        self.add_parameter('--bucket', action='store', dest='bucket', type=str,
-                           optional=False, help='name of the Amazon S3 bucket')
-        self.add_parameter('--prefix', action='store', dest='prefix', type=str,
-                           optional=False, 
+        self.add_argument('--bucket', dest='bucket', type=str, optional=False,
+                          help='name of the Amazon S3 bucket')
+        self.add_argument('--prefix', dest='prefix', type=str, optional=False,
                            help='prefix string to be added to the s3 objects key')
 
     def run(self, options):
