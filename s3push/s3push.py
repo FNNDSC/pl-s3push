@@ -31,13 +31,24 @@ class S3PushApp(ChrisApp):
     LICENSE         = 'Opensource (MIT)'
     VERSION         = '0.1'
 
+    # Fill out this with key-value output descriptive info (such as an output file path
+    # relative to the output dir) that you want to save to the output meta file when
+    # called with the --saveoutputmeta flag
+    OUTPUT_META_DICT = {}
+
     def define_parameters(self):
+        """
+        Define the CLI arguments accepted by this plugin app.
+        """
         self.add_argument('--bucket', dest='bucket', type=str, optional=False,
                           help='name of the Amazon S3 bucket')
         self.add_argument('--prefix', dest='prefix', type=str, optional=False,
                            help='prefix string to be added to the s3 objects key')
 
     def run(self, options):
+        """
+        Define the code to be run by this plugin app.
+        """
 
         # options.outputdir is not being used! Some output data file needs to be written!
 
