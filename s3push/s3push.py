@@ -44,6 +44,10 @@ class S3PushApp(ChrisApp):
                           help='name of the Amazon S3 bucket')
         self.add_argument('--prefix', dest='prefix', type=str, optional=False,
                            help='prefix string to be added to the s3 objects key')
+        self.add_argument('--awskeyid', dest='awskeyid', type=str,
+                          optional=False, help='aws access key id')
+        self.add_argument('--awssecretkey', dest='awssecretkey',
+                          type=str, optional=False, help='aws secret access key')
 
     def run(self, options):
         """
@@ -52,7 +56,17 @@ class S3PushApp(ChrisApp):
 
         # options.outputdir is not being used! Some output data file needs to be written!
 
-        s3client = boto3.client('s3')
+        # get Amazon S3 credentials
+        if options.awskeyid and options.awssecretkey:
+            s3client = boto3.client(
+                's3',
+                aws_access_key_id=options.awskeyid,
+                aws_secret_access_key=options.awssecretkey
+            )
+        else:
+            s3client = boto3.client('s3')
+
+        # upload folders/files to Amazon S3
         for (dirpath, dirnames, filenames) in os.walk(options.inputdir):
             relative_path = dirpath.replace(options.inputdir, "").strip('/')
             for fname in filenames:
