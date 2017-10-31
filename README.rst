@@ -24,8 +24,8 @@ Assign an "input" directory to ``/incoming`` and an output directory to ``/outgo
 .. code-block:: bash
 
     docker run --rm                                                     \
-        -v $(pwd)/out:/incoming                                         \
-        -v $(pwd)/out2:/outgoing                                        \
+        -v /tmp/input:/incoming                                         \
+        -v /tmp/output:/outgoing                                        \
         fnndsc/pl-s3push                                                \
         s3push.py --awskeyid KEYID --awssecretkey ACCESSKEY --bucket bch-fnndsc --prefix test /incoming /outgoing
 
@@ -33,5 +33,5 @@ The above will push a copy of each file/folder in the container's ``/incoming`` 
 S3 storage and prefix the copy with the ``prefix`` text (in this case "test"). Some
 metadata files will be written to the container's ``/outgoing`` directory.
 
-Make sure that the host ``$(pwd)/out`` directory is world readable and ``$(pwd)/out2``
+Make sure that the host ``/tmp/input`` directory is world readable and ``/tmp/output``
 directory is world writable!
