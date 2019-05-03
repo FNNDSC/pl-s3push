@@ -3,7 +3,7 @@
 FROM fnndsc/ubuntu-python3:latest
 MAINTAINER fnndsc "dev@babymri.org"
 
-ENV APPROOT="/usr/src/s3push"  VERSION="0.1"
+ENV APPROOT="/usr/src/s3push"
 COPY ["s3push", "${APPROOT}"]
 COPY ["requirements.txt", "${APPROOT}"]
 
